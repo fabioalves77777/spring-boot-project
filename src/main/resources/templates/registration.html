@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Registration Form</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<form class="form-horizontal" th:object="${user}" th:action="@{/registration}" method="POST">
+			<h2 class="form-signin-heading">Create your account</h2>
+			<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+			    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>    
+			</div>
+			<div class="form-group">
+ 					<fieldset>
+						<div class="form-group row">                                                          
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+							    <label>E-mail</label>
+							    <input type="email" class="form-control input-sm" th:field="*{username}" name="username"autofocus="autofocus" placeholder="e-mail"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+								<label>Password</label> 
+								<input type="password" class="form-control input-sm" th:field="*{password}" name="password" placeholder="password"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-4" th:classappend="${#fields.hasErrors('passwordConfirm')}? 'has-error'">
+								<label>Confirm Password</label> 
+								<input type="password" class="form-control input-sm" th:field="*{passwordConfirm}" name="passwordConfirm" placeholder="confirm password"/>
+							</div>
+						</div>						
+					</fieldset>
+				</div>
+				<div class="form-group row">
+					<button type="submit" class="btn btn-sm btn-primary">Save</button>
+					<a th:href="@{/}" class="btn btn-sm btn-default">Cancel</a>
+				</div>
+		</form>
+    </div>
+</body>
+</html>
